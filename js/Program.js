@@ -1,9 +1,9 @@
-"use strict";
 /* exported Porgram */
+// eslint-disable-next-line no-unused-vars
 class Program {
   constructor(gl, vertexShader, fragmentShader) {
     this.gl = gl;
-    this.sourceFileNames = {vs:vertexShader.sourceFileName, fs:fragmentShader.sourceFileName};
+    this.sourceFileNames = { vs: vertexShader.sourceFileName, fs: fragmentShader.sourceFileName };
     this.glProgram = gl.createProgram();
     gl.attachShader(this.glProgram, vertexShader.glShader);
     gl.attachShader(this.glProgram, fragmentShader.glShader);
@@ -17,3 +17,4 @@ class Program {
     }
   }
 }
+

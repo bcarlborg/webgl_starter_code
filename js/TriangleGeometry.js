@@ -1,5 +1,6 @@
-"use strict";
+
 /* exported TriangleGeometry */
+// eslint-disable-next-line no-unused-vars
 class TriangleGeometry {
   constructor(gl) {
     this.gl = gl;
@@ -10,8 +11,8 @@ class TriangleGeometry {
     gl.bufferData(gl.ARRAY_BUFFER,
       new Float32Array([
         -0.5, -0.5, 0.5,
-        -0.5,  0.5, 0.5,
-         0.5,  0.0, 0.5,
+        -0.5, 0.5, 0.5,
+        0.5, 0.0, 0.5,
       ]),
       gl.STATIC_DRAW);
 
@@ -30,21 +31,22 @@ class TriangleGeometry {
 
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.enableVertexAttribArray(0);
-    gl.vertexAttribPointer(0,
-      3, gl.FLOAT, //< three pieces of float
-      false, //< do not normalize (make unit length)
-      0, //< tightly packed
-      0 //< data starts at array start
+    gl.vertexAttribPointer(
+      0,
+      3, gl.FLOAT, // < three pieces of float
+      false, // < do not normalize (make unit length)
+      0, // < tightly packed
+      0, // < data starts at array start
     );
 
     gl.bindVertexArray(null);
   }
 
   draw() {
-    const gl = this.gl;
+    const { gl } = this;
 
     gl.bindVertexArray(this.inputLayout);
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);  
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
     gl.drawElements(gl.TRIANGLES, 3, gl.UNSIGNED_SHORT, 0);
   }

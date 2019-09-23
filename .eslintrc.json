@@ -15,5 +15,8 @@
         "sourceType": "module"
     },
     "rules": {
+      "no-bitwise":"off",
+      "no-console":"off",
+      "no-control-regex":"off"
     }
 }
