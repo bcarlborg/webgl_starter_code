@@ -4,6 +4,6 @@ Shader.source[document.currentScript.src.split('js/shaders/')[1]] = `#version 30
   out vec4 fragmentColor;
 
   void main(void) {
-    fragmentColor = vec4(1, 1, 0.0, 1);
+    fragmentColor = vec4(0.51, 0.74, 0.50, 1);
   }
 `;

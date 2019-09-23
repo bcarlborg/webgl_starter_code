@@ -44,6 +44,9 @@ class App{
       //jshint unused:false
     };
     window.addEventListener('resize', () => this.resize() );
+
+    // asks the browser to execute a function every time a update an animation before a
+    // repaint occurs on the screen. (This is the entry point for exectuing our code)
     window.requestAnimationFrame( () => this.update() );
   }
 
@@ -51,18 +54,18 @@ class App{
   update() {
 
     this.scene.update(this.gl, this.keysPressed);
-    this.overlay.innerHTML = "Hello AIT.";
 
-    // refresh
+    // requestAnimationFrame must be called in this function
+    // in order to access the next frame of the animation
     window.requestAnimationFrame( () => this.update() );
   }
 }
 
-// entry point from HTML
+// entry point from HTML -- the load listener is executed when all of the
+// page assests are downloaded (fully _loaded_)
 window.addEventListener('load', () => {
   const canvas = document.getElementById("canvas");
   const overlay = document.getElementById("overlay");
-  overlay.innerHTML = `<font color="red">Hello JavaScript!</font>`;
 
   const app = new App(canvas, overlay);
   app.registerEventHandlers();
