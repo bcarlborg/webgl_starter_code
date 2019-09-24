@@ -7,17 +7,16 @@ class StarGeometry {
     // initialize the start with the origin point
     this.starVertices = [0.0, 0.0, 0.0];
 
-    const degreeStep = 30;
+    const degreeStep = 10;
     for (let step = 0; step < 360; step += degreeStep) {
       const radians = (step * Math.PI) / 180;
       let horizontal = Math.cos(radians);
       let vertical = Math.sin(radians);
 
-      // let scale = (90 - (step % 90)) / 90;
-      // console.log(step, scale);
-      // scale = 1;
-      // horizontal *= scale;
-      // vertical *= scale;
+      const scale = (90 - (step % 90)) / 90;
+      console.log(step, scale);
+      horizontal *= scale;
+      vertical *= scale;
       this.starVertices.push(horizontal, vertical, 0.0);
     }
 
