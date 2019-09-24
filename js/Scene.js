@@ -6,7 +6,8 @@ class Scene {
     this.vsIdle = new Shader(gl, gl.VERTEX_SHADER, 'idle-vs.glsl');
     this.fsSolid = new Shader(gl, gl.FRAGMENT_SHADER, 'solid-fs.glsl');
     this.solidProgram = new Program(gl, this.vsIdle, this.fsSolid);
-    this.triangleGeometry = new TriangleGeometry(gl);
+    // this.triangleGeometry = new TriangleGeometry(gl);
+    this.starGeometry = new StarGeometry(gl);
   }
   /* eslint-disable no-undef */
 
@@ -28,6 +29,7 @@ class Scene {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     gl.useProgram(this.solidProgram.glProgram);
-    this.triangleGeometry.draw();
+    // this.triangleGeometry.draw();
+    this.starGeometry.draw();
   }
 }
