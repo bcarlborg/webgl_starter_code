@@ -14,7 +14,6 @@ class StarGeometry {
       let vertical = Math.sin(radians);
 
       const scale = (90 - (step % 90)) / 90;
-      console.log(step, scale);
       horizontal *= scale;
       vertical *= scale;
       this.starVertices.push(horizontal, vertical, 0.0);
@@ -25,9 +24,6 @@ class StarGeometry {
       this.starIndices.push(0, step, step + 1);
     }
     this.starIndices.push(0, (this.starVertices.length / 3) - 1, 1);
-
-    console.log(this.starVertices);
-    console.log(this.starIndices);
 
     // allocate and fill vertex buffer in device memory (OpenGL name: array buffer)
     this.vertexBuffer = gl.createBuffer();
