@@ -17,6 +17,7 @@ class Scene {
     // this is also used to create our vertex array objects for the attributes
     // this.triangleGeometry = new TriangleGeometry(gl);
     this.donutGeometry = new DonutGeometry(gl);
+    this.donutGeometryTwo = new DonutGeometry(gl);
     this.eggGeometry = new EggGeometry(gl);
 
     this.now = new Date();
@@ -46,6 +47,7 @@ class Scene {
     this.eggGeometry.draw(this.solidProgram, timeDiff);
 
     gl.useProgram(this.stripedProgram.glProgram);
-    this.donutGeometry.draw(this.stripedProgram, timeDiff);
+    this.donutGeometry.draw(this.stripedProgram, timeDiff, 0);
+    this.donutGeometryTwo.draw(this.stripedProgram, timeDiff, 1);
   }
 }

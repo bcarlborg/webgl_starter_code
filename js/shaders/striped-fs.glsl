@@ -4,11 +4,14 @@ Shader.source[document.currentScript.src.split('js/shaders/')[1]] = `#version 30
   out vec4 fragmentColor;
   in vec4 v_position;
 
+  uniform float u_stripeDensity;
+  uniform float u_colorScheme;
+
   void main(void) {
-    float stripeDensity = 10.0;
+    float stripeDensity = 5.0;
     float colorScheme = 0.0;
 
-    float sinX = ceil(sin(v_position.x * stripeDensity) + 1.0);
+    float sinX = ceil(sin(v_position.x * u_stripeDensity) + 1.0);
 
     float myRedFirst;
     float myGreenFirst;
@@ -23,7 +26,7 @@ Shader.source[document.currentScript.src.split('js/shaders/')[1]] = `#version 30
     float blueChannel;
 
 
-    if (colorScheme == 0.0) {
+    if (u_colorScheme == 0.0) {
       // nice Orange
       myRedFirst = 0.894;
       myGreenFirst = 0.341;
@@ -35,7 +38,7 @@ Shader.source[document.currentScript.src.split('js/shaders/')[1]] = `#version 30
       myBlueSecond = 0.76;
     }
 
-    if (colorScheme == 1.0) {
+    if (u_colorScheme == 1.0) {
       // nice green
       myRedFirst = 0.80;
       myGreenFirst = 0.90;

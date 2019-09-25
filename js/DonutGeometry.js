@@ -97,10 +97,10 @@ class DonutGeometry {
     }
   }
 
-  draw(programInfo, timeDiff) {
+  draw(programInfo, timeDiff, version) {
     const { gl } = this;
 
-    this.initUniforms(timeDiff);
+    this.initUniforms(timeDiff, version);
 
     gl.bindVertexArray(this.inputLayout);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
@@ -111,25 +111,46 @@ class DonutGeometry {
     const scaleLocation = gl.getUniformLocation(programInfo.glProgram, 'u_scale');
     gl.uniform4fv(scaleLocation, this.uniforms.scale);
 
+    const stripeDensityLocation = gl.getUniformLocation(programInfo.glProgram, 'u_stripeDensity');
+    gl.uniform1f(stripeDensityLocation, this.uniforms.stripeDensity);
+
+    const stripeColorLocation = gl.getUniformLocation(programInfo.glProgram, 'u_colorScheme');
+    gl.uniform1f(stripeColorLocation, this.uniforms.colorScheme);
+
     gl.drawElements(gl.TRIANGLES, this.indexArray.length, gl.UNSIGNED_SHORT, 0);
   }
 
   // eslint-disable-next-line no-unused-vars
-  initUniforms(timeDiff) {
+  initUniforms(timeDiff, version) {
     const screenRatio = (this.gl.canvas.height * 1.0) / this.gl.canvas.width;
-    // const baseScale = 0.01;
-    // const magnitude = 0.4;
-    // const milliSecondsPeriod = 8000.0;
-    // const timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
-    // const uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + baseScale + magnitude;
+    // const baseScale = 1;
+    const magnitude = 1;
+    const milliSecondsPeriod = 6000.0;
+    const timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
+    const uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + magnitude;
     // const pulsingScale = {
     //   x: uniformScale * screenRatio,
     //   y: uniformScale,
     // };
+
+    let colorScheme = 1.0;
+    if (version === 1) {
+      colorScheme = 0.0;
+    }
     const translation = {
       x: -0.5,
       y: 0.5,
     };
+
+    if (version === 1) {
+      translation.x = -0.5;
+      translation.y = -0.5;
+    }
+
+    let stripeDensity = 10.0;
+    if (version === 1) {
+      stripeDensity *= uniformScale;
+    }
 
     const scale = {
       x: 0.2,
@@ -140,6 +161,8 @@ class DonutGeometry {
     this.uniforms = {
       translation: [translation.x, translation.y, 0, 0],
       scale: [scale.x, scale.y, 1.0, 1.0],
+      stripeDensity,
+      colorScheme,
     };
   }
 }
