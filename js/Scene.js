@@ -43,37 +43,7 @@ class Scene {
 
     const timeDiff = new Date().getTime() - this.now.getTime();
 
-    const cubeTranslationX = -0.75;
-    const cubeTranslationY = 0.75;
-
-    const screenRatio = (gl.canvas.height * 1.0) / gl.canvas.width;
-
-    const baseScale = 0.01;
-    const magnitude = 0.4;
-    const milliSecondsPeriod = 8000.0;
-    const timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
-    const uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + baseScale + magnitude;
-    const pulsingScale = {
-      x: uniformScale * screenRatio,
-      y: uniformScale,
-    };
-
-    const cubeUniforms = {
-      translation: [cubeTranslationX, cubeTranslationY, 0, 0],
-      scale: [0.2, 0.2, 1.0, 1.0],
-    };
-
-    this.donutGeometry.draw(cubeUniforms, this.solidProgram);
-
-    const eggBaseScale = 0.1;
-
-    const eggTranslationX = 0.75;
-    const eggTranslationY = 0.75;
-
-    const eggUniforms = {
-      translation: [eggTranslationX, eggTranslationY, 0, 0],
-      scale: [eggBaseScale, eggBaseScale, 1.0, 1.0],
-    };
-    this.eggGeometry.draw(eggUniforms, this.solidProgram);
+    this.donutGeometry.draw(this.solidProgram, timeDiff);
+    this.eggGeometry.draw(this.solidProgram, timeDiff);
   }
 }

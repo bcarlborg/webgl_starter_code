@@ -79,18 +79,46 @@ class EggGeometry {
     }
   }
 
-  draw(uniforms, programInfo) {
+  draw(programInfo, timeDiff) {
     const { gl } = this;
+
+    this.initUniforms(timeDiff);
 
     gl.bindVertexArray(this.inputLayout);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
     const translationLocation = gl.getUniformLocation(programInfo.glProgram, 'u_translation');
-    gl.uniform4fv(translationLocation, uniforms.translation);
+    gl.uniform4fv(translationLocation, this.uniforms.translation);
 
     const scaleLocation = gl.getUniformLocation(programInfo.glProgram, 'u_scale');
-    gl.uniform4fv(scaleLocation, uniforms.scale);
+    gl.uniform4fv(scaleLocation, this.uniforms.scale);
 
     gl.drawElements(gl.TRIANGLES, this.indexArray.length, gl.UNSIGNED_SHORT, 0);
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  initUniforms(timeDiff) {
+    const screenRatio = (this.gl.canvas.height * 1.0) / this.gl.canvas.width;
+    // const baseScale = 0.01;
+    // const magnitude = 0.4;
+    // const milliSecondsPeriod = 8000.0;
+    // const timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
+    // const uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + baseScale + magnitude;
+    // const pulsingScale = {
+    //   x: uniformScale * screenRatio,
+    //   y: uniformScale,
+    // };
+
+    const translation = {
+      x: 0.3,
+      y: -0.5,
+    };
+    translation.x *= screenRatio;
+
+
+    this.uniforms = {
+      translation: [translation.x, translation.y, 0, 0],
+      scale: [0.15, 0.15, 1.0, 1.0],
+    };
   }
 }
