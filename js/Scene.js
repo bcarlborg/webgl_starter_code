@@ -31,7 +31,7 @@ class Scene {
   update(gl, keysPressed) {
     // jshint bitwise:false
     // jshint unused:false
-
+    // console.log(gl.canvas.width);
     // clear the screen
     gl.clearColor(0.11, 0.13, 0.13, 1.0);
     gl.clearDepth(1.0);
@@ -45,6 +45,8 @@ class Scene {
     const translationX = 0.0;
     const translationY = 0.0;
 
+    const screenRatio = (gl.canvas.height * 1.0) / gl.canvas.width;
+
     const baseScale = 0.01;
     const magnitude = 0.4;
     const milliSecondsPeriod = 8000.0;
@@ -53,7 +55,7 @@ class Scene {
 
     const cubeGeometry = {
       translation: [translationX, translationY, 0, 0],
-      scale: [uniformScale, uniformScale, 1.0, 1.0],
+      scale: [uniformScale * screenRatio, uniformScale, 1.0, 1.0],
     };
 
     this.donutGeometry.draw(cubeGeometry, this.solidProgram);
