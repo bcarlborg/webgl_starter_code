@@ -14,7 +14,8 @@ class Scene {
     // initializes the geometry and attribute buffer values for our geometry
     // this is also used to create our vertex array objects for the attributes
     // this.triangleGeometry = new TriangleGeometry(gl);
-    this.donutGeometry = new DonutGeometry(gl);
+    // this.donutGeometry = new DonutGeometry(gl);
+    this.donutGeometry = new EggGeometry(gl);
 
     this.now = new Date();
   }
