@@ -53,7 +53,6 @@ class DonutGeometry {
     const resolution = 360;
     const delta = 360 / resolution;
     for (let i = 0; i < 360; i += delta) {
-      console.log('angle:', i, i + delta);
       const preAngle = (i * Math.PI) / 180;
       const postAngle = ((i + delta) * Math.PI) / 180;
 
