@@ -22,6 +22,7 @@ class Shader {
         `Error in shader ${sourceFileName}:
         ${gl.getShaderInfoLog(this.glShader).replace(/ERROR: 0/g, Shader.sourcePathURL + sourceFileName)}`,
       );
+      console.log(gl.getShaderInfoLog(this.glShader));
       throw new Error(`Shader ${sourceFileName} had compilation errors.`);
     }
   }
