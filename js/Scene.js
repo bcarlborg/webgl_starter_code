@@ -14,8 +14,8 @@ class Scene {
     // initializes the geometry and attribute buffer values for our geometry
     // this is also used to create our vertex array objects for the attributes
     // this.triangleGeometry = new TriangleGeometry(gl);
-    // this.donutGeometry = new DonutGeometry(gl);
-    this.donutGeometry = new EggGeometry(gl);
+    this.donutGeometry = new DonutGeometry(gl);
+    this.eggGeometry = new EggGeometry(gl);
 
     this.now = new Date();
   }
@@ -43,8 +43,8 @@ class Scene {
 
     const timeDiff = new Date().getTime() - this.now.getTime();
 
-    const translationX = 0.0;
-    const translationY = 0.0;
+    const cubeTranslationX = -0.75;
+    const cubeTranslationY = 0.75;
 
     const screenRatio = (gl.canvas.height * 1.0) / gl.canvas.width;
 
@@ -53,12 +53,27 @@ class Scene {
     const milliSecondsPeriod = 8000.0;
     const timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
     const uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + baseScale + magnitude;
-
-    const cubeGeometry = {
-      translation: [translationX, translationY, 0, 0],
-      scale: [uniformScale * screenRatio, uniformScale, 1.0, 1.0],
+    const pulsingScale = {
+      x: uniformScale * screenRatio,
+      y: uniformScale,
     };
 
-    this.donutGeometry.draw(cubeGeometry, this.solidProgram);
+    const cubeUniforms = {
+      translation: [cubeTranslationX, cubeTranslationY, 0, 0],
+      scale: [0.2, 0.2, 1.0, 1.0],
+    };
+
+    this.donutGeometry.draw(cubeUniforms, this.solidProgram);
+
+    const eggBaseScale = 0.1;
+
+    const eggTranslationX = 0.75;
+    const eggTranslationY = 0.75;
+
+    const eggUniforms = {
+      translation: [eggTranslationX, eggTranslationY, 0, 0],
+      scale: [eggBaseScale, eggBaseScale, 1.0, 1.0],
+    };
+    this.eggGeometry.draw(eggUniforms, this.solidProgram);
   }
 }
