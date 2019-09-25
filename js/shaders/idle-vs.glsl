@@ -3,9 +3,12 @@ Shader.source[document.currentScript.src.split('js/shaders/')[1]] = `#version 30
   uniform vec4 u_translation;
   uniform vec4 u_scale;
 
+  out vec4 v_positionWithOffset;
+
   void main(void) {
     vec4 scaledPosition = vertexPosition * u_scale;
     vec4 translatedPosition = scaledPosition + u_translation;
+    v_positionWithOffset = translatedPosition;
     gl_Position = translatedPosition;
   }
 `;

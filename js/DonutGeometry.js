@@ -126,17 +126,20 @@ class DonutGeometry {
     //   x: uniformScale * screenRatio,
     //   y: uniformScale,
     // };
-
     const translation = {
-      x: -0.6,
-      y: 0.75,
+      x: -0.5,
+      y: 0.5,
     };
-    translation.x *= screenRatio;
 
+    const scale = {
+      x: 0.2,
+      y: 0.2,
+    };
+    scale.x *= screenRatio;
 
     this.uniforms = {
       translation: [translation.x, translation.y, 0, 0],
-      scale: [0.2, 0.2, 1.0, 1.0],
+      scale: [scale.x, scale.y, 1.0, 1.0],
     };
   }
 }

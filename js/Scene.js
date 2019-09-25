@@ -6,10 +6,12 @@ class Scene {
     // Just compiles the shaders, no magic
     this.vsIdle = new Shader(gl, gl.VERTEX_SHADER, 'idle-vs.glsl');
     this.fsSolid = new Shader(gl, gl.FRAGMENT_SHADER, 'solid-fs.glsl');
+    this.fsStriped = new Shader(gl, gl.FRAGMENT_SHADER, 'striped-fs.glsl');
 
     // Links the two shaders together and associates an attribute with a
     // specific index in the program
     this.solidProgram = new Program(gl, this.vsIdle, this.fsSolid);
+    this.stripedProgram = new Program(gl, this.vsIdle, this.fsStriped);
 
     // initializes the geometry and attribute buffer values for our geometry
     // this is also used to create our vertex array objects for the attributes
@@ -30,6 +32,7 @@ class Scene {
   // because of the requestAnimationFrame call in app.js
   // eslint-disable-next-line no-unused-vars
   update(gl, keysPressed) {
+    const timeDiff = new Date().getTime() - this.now.getTime();
     // jshint bitwise:false
     // jshint unused:false
     // console.log(gl.canvas.width);
@@ -39,11 +42,10 @@ class Scene {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     gl.useProgram(this.solidProgram.glProgram);
-    // this.triangleGeometry.draw();
 
-    const timeDiff = new Date().getTime() - this.now.getTime();
-
-    this.donutGeometry.draw(this.solidProgram, timeDiff);
     this.eggGeometry.draw(this.solidProgram, timeDiff);
+
+    gl.useProgram(this.stripedProgram.glProgram);
+    this.donutGeometry.draw(this.stripedProgram, timeDiff);
   }
 }

@@ -57,9 +57,9 @@ class EggGeometry {
       const preAngle = (i * Math.PI) / 180;
       const postAngle = ((i + delta) * Math.PI) / 180;
 
-      const k1 = 0.5;
+      const k1 = 0.9;
       const k2 = 0.9;
-      const k3 = 0.8;
+      const k3 = 0.6;
 
       const eggX = (angle) => (
         (k1 * Math.cos(angle)) + (k2 + k3 * Math.cos(angle)) * Math.cos(angle)
@@ -113,12 +113,16 @@ class EggGeometry {
       x: 0.3,
       y: -0.5,
     };
-    translation.x *= screenRatio;
 
+    const scale = {
+      x: 0.13,
+      y: 0.13,
+    };
+    scale.x *= screenRatio;
 
     this.uniforms = {
       translation: [translation.x, translation.y, 0, 0],
-      scale: [0.15, 0.15, 1.0, 1.0],
+      scale: [scale.x, scale.y, 1.0, 1.0],
     };
   }
 }
