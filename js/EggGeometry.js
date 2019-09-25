@@ -57,8 +57,8 @@ class EggGeometry {
       const preAngle = (i * Math.PI) / 180;
       const postAngle = ((i + delta) * Math.PI) / 180;
 
-      const k1 = 0.9;
-      const k2 = 0.9;
+      const k1 = 0.4;
+      const k2 = 0.7;
       const k3 = 0.6;
 
       const eggX = (angle) => (
