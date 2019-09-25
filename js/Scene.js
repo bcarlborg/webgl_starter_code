@@ -38,6 +38,11 @@ class Scene {
 
     gl.useProgram(this.solidProgram.glProgram);
     // this.triangleGeometry.draw();
-    this.donutGeometry.draw();
+
+
+    const cubeGeometry = {
+      translation: [0.25, 0.25, 0, 0],
+    };
+    this.donutGeometry.draw(cubeGeometry, this.solidProgram);
   }
 }

@@ -96,11 +96,14 @@ class DonutGeometry {
     }
   }
 
-  draw() {
+  draw(cubeUniforms, programInfo) {
     const { gl } = this;
 
     gl.bindVertexArray(this.inputLayout);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
+
+    const translationLocation = gl.getUniformLocation(programInfo.glProgram, 'u_translation');
+    gl.uniform4fv(translationLocation, cubeUniforms.translation);
 
     gl.drawElements(gl.TRIANGLES, this.indexArray.length, gl.UNSIGNED_SHORT, 0);
   }
