@@ -11,11 +11,12 @@ class Scene {
     // specific index in the program
     this.solidProgram = new Program(gl, this.vsIdle, this.fsSolid);
 
-
     // initializes the geometry and attribute buffer values for our geometry
     // this is also used to create our vertex array objects for the attributes
     // this.triangleGeometry = new TriangleGeometry(gl);
     this.donutGeometry = new DonutGeometry(gl);
+
+    this.now = new Date();
   }
   /* eslint-disable no-undef */
 
@@ -39,11 +40,22 @@ class Scene {
     gl.useProgram(this.solidProgram.glProgram);
     // this.triangleGeometry.draw();
 
+    const timeDiff = new Date().getTime() - this.now.getTime();
+
+    const translationX = 0.0;
+    const translationY = 0.0;
+
+    const baseScale = 0.01;
+    const magnitude = 0.4;
+    const milliSecondsPeriod = 8000.0;
+    const timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
+    const uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + baseScale + magnitude;
 
     const cubeGeometry = {
-      translation: [0.25, 0.25, 0, 0],
-      scale: [0.2, 0.2, 1.0, 1.0],
+      translation: [translationX, translationY, 0, 0],
+      scale: [uniformScale, uniformScale, 1.0, 1.0],
     };
+
     this.donutGeometry.draw(cubeGeometry, this.solidProgram);
   }
 }
