@@ -3,9 +3,17 @@
 class Scene {
   /* eslint-disable no-undef */
   constructor(gl) {
+    // Just compiles the shaders, no magic
     this.vsIdle = new Shader(gl, gl.VERTEX_SHADER, 'idle-vs.glsl');
     this.fsSolid = new Shader(gl, gl.FRAGMENT_SHADER, 'solid-fs.glsl');
+
+    // Links the two shaders together and associates an attribute with a
+    // specific index in the program
     this.solidProgram = new Program(gl, this.vsIdle, this.fsSolid);
+
+
+    // initializes the geometry and attribute buffer values for our geometry
+    // this is also used to create our vertex array objects for the attributes
     // this.triangleGeometry = new TriangleGeometry(gl);
     this.starGeometry = new StarGeometry(gl);
   }

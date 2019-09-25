@@ -11,9 +11,11 @@ class App {
       throw new Error('Browser does not support WebGL2');
     }
 
+    // compiles our shaders and our program
     // eslint-disable-next-line no-undef
     this.scene = new Scene(this.gl);
 
+    // resize the canvas for the first time
     this.resize();
   }
 
@@ -45,6 +47,8 @@ class App {
     this.canvas.onmouseup = (event) => {
       // jshint unused:false
     };
+
+    // Continually will execute our resize funciton as the screen size is changed
     window.addEventListener('resize', () => this.resize());
 
     // asks the browser to execute a function every time a update an animation before a

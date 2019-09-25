@@ -8,6 +8,8 @@ class Program {
     gl.attachShader(this.glProgram, vertexShader.glShader);
     gl.attachShader(this.glProgram, fragmentShader.glShader);
 
+    // bind attribute to a specific location (index) in the shader program
+    // calling gl.getAttribLocation DOES return the second argument
     gl.bindAttribLocation(this.glProgram, 0, 'vertexPosition');
 
     gl.linkProgram(this.glProgram);

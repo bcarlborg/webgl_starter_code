@@ -25,12 +25,21 @@ class TriangleGeometry {
       ]),
       gl.STATIC_DRAW);
 
-    // create and bind input layout with input buffer bindings (OpenGL name: vertex array)
+    // create our vertex array object
     this.inputLayout = gl.createVertexArray();
     gl.bindVertexArray(this.inputLayout);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
+
+    // this associates the current buffer with the index of an attribute to our program
+    // that was set in the program js file. Needs to match
+    // Would probably be better to use getAttribLocation to do this instead of
+    // a magic constant
     gl.enableVertexAttribArray(0);
+
+    // describe the vertex attribute data, the first argument also needs to be an
+    // index that directly maps to our attribute, probably would be better with
+    // getAttribLocation as well.
     gl.vertexAttribPointer(
       0,
       3, gl.FLOAT, // < three pieces of float
@@ -39,6 +48,7 @@ class TriangleGeometry {
       0, // < data starts at array start
     );
 
+    // binds out vertex array to the program
     gl.bindVertexArray(null);
   }
 
