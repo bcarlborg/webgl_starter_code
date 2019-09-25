@@ -5,6 +5,7 @@ Shader.source[document.currentScript.src.split('js/shaders/')[1]] = `#version 30
   in vec4 v_position;
 
   void main(void) {
-    fragmentColor = vec4(v_position.x + 1.0, v_position.y + 1.0, 0.50, 1);
+    float r = (0.5 * sin(v_position.x * 10.0)) + 0.5;
+    fragmentColor = vec4(r, 0.50, 0.50, 1);
   }
 `;
