@@ -79,7 +79,7 @@ class EggGeometry {
     }
   }
 
-  draw(programInfo, timeDiff) {
+  draw(programInfo, timeDiff, loc) {
     const { gl } = this;
 
     this.initUniforms(timeDiff);
@@ -88,7 +88,7 @@ class EggGeometry {
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
     const translationLocation = gl.getUniformLocation(programInfo.glProgram, 'u_translation');
-    gl.uniform4fv(translationLocation, this.uniforms.translation);
+    gl.uniform4fv(translationLocation, loc);
 
     const scaleLocation = gl.getUniformLocation(programInfo.glProgram, 'u_scale');
     gl.uniform4fv(scaleLocation, this.uniforms.scale);

@@ -44,7 +44,15 @@ class Scene {
 
     gl.useProgram(this.solidProgram.glProgram);
 
-    this.eggGeometry.draw(this.solidProgram, timeDiff);
+    let x = (keysPressed.x * 1.0) / gl.canvas.width;
+    let y = (keysPressed.y * 1.0) / gl.canvas.height;
+    x *= 2;
+    y *= 2;
+
+    x -= 1;
+    y -= 1;
+    this.eggGeometry.draw(this.solidProgram, timeDiff,
+      [x ? x : 0, y ? y : 0, 0.0, 0.0]);
 
     gl.useProgram(this.stripedProgram.glProgram);
     this.donutGeometry.draw(this.stripedProgram, timeDiff, 0);

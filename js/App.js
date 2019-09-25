@@ -4,6 +4,7 @@ class App {
   constructor(canvas, overlay) {
     this.canvas = canvas;
     this.overlay = overlay;
+    this.keysPressed = {};
 
     this.gl = canvas.getContext('webgl2');
 
@@ -35,10 +36,11 @@ class App {
       // jshint unused:false
     };
     this.canvas.onmousedown = (event) => {
-      // jshint unused:false
+      const { x, y } = event;
+      this.keysPressed.x = x;
+      this.keysPressed.y = this.gl.canvas.height - y;
     };
     this.canvas.onmousemove = (event) => {
-      // jshint unused:false
       event.stopPropagation();
     };
     this.canvas.onmouseout = (event) => {
