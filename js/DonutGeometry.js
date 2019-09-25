@@ -105,6 +105,9 @@ class DonutGeometry {
     const translationLocation = gl.getUniformLocation(programInfo.glProgram, 'u_translation');
     gl.uniform4fv(translationLocation, cubeUniforms.translation);
 
+    const scaleLocation = gl.getUniformLocation(programInfo.glProgram, 'u_scale');
+    gl.uniform4fv(scaleLocation, cubeUniforms.scale);
+
     gl.drawElements(gl.TRIANGLES, this.indexArray.length, gl.UNSIGNED_SHORT, 0);
   }
 }

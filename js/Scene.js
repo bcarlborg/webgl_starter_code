@@ -42,6 +42,7 @@ class Scene {
 
     const cubeGeometry = {
       translation: [0.25, 0.25, 0, 0],
+      scale: [0.2, 0.2, 1.0, 1.0],
     };
     this.donutGeometry.draw(cubeGeometry, this.solidProgram);
   }
