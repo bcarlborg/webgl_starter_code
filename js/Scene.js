@@ -15,7 +15,7 @@ class Scene {
     // initializes the geometry and attribute buffer values for our geometry
     // this is also used to create our vertex array objects for the attributes
     // this.triangleGeometry = new TriangleGeometry(gl);
-    this.starGeometry = new StarGeometry(gl);
+    this.donutGeometry = new DonutGeometry(gl);
   }
   /* eslint-disable no-undef */
 
@@ -38,6 +38,6 @@ class Scene {
 
     gl.useProgram(this.solidProgram.glProgram);
     // this.triangleGeometry.draw();
-    this.starGeometry.draw();
+    this.donutGeometry.draw();
   }
 }

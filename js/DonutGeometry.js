@@ -6,7 +6,6 @@ class DonutGeometry {
     this.indexArray = [];
 
     this.buildDonutVertexArray();
-
     this.vertexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER,
@@ -47,8 +46,14 @@ class DonutGeometry {
   }
 
   buildDonutVertexArray() {
-    const delta = 10;
+    // resolution variable determines how many triangle blocks will be used
+    // when rendering the donut. Higher resolution means better looking donut.
+    // If the resolution is 360, the donut will be built from one rectangle for
+    // every one degree of rotation in the donut
+    const resolution = 360;
+    const delta = 360 / resolution;
     for (let i = 0; i < 360; i += delta) {
+      console.log('angle:', i, i + delta);
       const preAngle = (i * Math.PI) / 180;
       const postAngle = ((i + delta) * Math.PI) / 180;
 
@@ -57,7 +62,7 @@ class DonutGeometry {
       const preInnerCoord = {
         x: Math.cos(preAngle) * innerScalar,
         y: Math.sin(preAngle) * innerScalar,
-        index: (this.vertexBuffer.length / 3),
+        index: (this.vertexArray.length / 3),
       };
 
       const preOuterCoord = {
@@ -75,7 +80,7 @@ class DonutGeometry {
       const postOuterCoord = {
         x: Math.cos(postAngle),
         y: Math.sin(postAngle),
-        index: postInnerCoord + 1,
+        index: postInnerCoord.index + 1,
       };
 
       this.vertexArray.push(
@@ -87,7 +92,7 @@ class DonutGeometry {
 
       this.indexArray.push(
         preOuterCoord.index, postOuterCoord.index, preInnerCoord.index,
-        postOuterCoord.index, preInnerCoord.index, postInnerCoord.index,
+        postOuterCoord.index, postInnerCoord.index, preInnerCoord.index,
       );
     }
   }
