@@ -57,7 +57,7 @@ class DonutGeometry {
       const preAngle = (i * Math.PI) / 180;
       const postAngle = ((i + delta) * Math.PI) / 180;
 
-      const innerScalar = 0.75;
+      const innerScalar = 0.65;
 
       const preInnerCoord = {
         x: Math.cos(preAngle) * innerScalar,
@@ -122,24 +122,25 @@ class DonutGeometry {
 
   // eslint-disable-next-line no-unused-vars
   initUniforms(timeDiff, version) {
-    const screenRatio = (this.gl.canvas.height * 1.0) / this.gl.canvas.width;
-    // const baseScale = 1;
-    const magnitude = 1;
-    const milliSecondsPeriod = 6000.0;
-    const timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
-    const uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + magnitude;
-    // const pulsingScale = {
-    //   x: uniformScale * screenRatio,
-    //   y: uniformScale,
-    // };
+    let screenRatio = (this.gl.canvas.height * 1.0) / this.gl.canvas.width;
+    let baseScale = 0.31;
+    let magnitude = 0.3;
+    let milliSecondsPeriod = 6000.0;
+    let timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
+    let uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + baseScale + magnitude;
+    let pulsingScale = {
+      x: uniformScale * screenRatio,
+      y: uniformScale,
+    };
+    const scale = pulsingScale;
 
     let colorScheme = 1.0;
     if (version === 1) {
       colorScheme = 0.0;
     }
     const translation = {
-      x: -0.5,
-      y: 0.5,
+      x: 0.0,
+      y: 0.0,
     };
 
     if (version === 1) {
@@ -147,16 +148,22 @@ class DonutGeometry {
       translation.y = -0.5;
     }
 
-    let stripeDensity = 10.0;
-    if (version === 1) {
-      stripeDensity *= uniformScale;
+    baseScale = 1;
+    magnitude = 10.0;
+    milliSecondsPeriod = 4000.0;
+    timeModulo = ((timeDiff % milliSecondsPeriod) / milliSecondsPeriod) * 2 * Math.PI;
+    uniformScale = (Math.sin(timeModulo + Math.PI) * magnitude) + baseScale + magnitude;
+
+    let stripeDensity = 3.0;
+    if (version === 0) {
+      stripeDensity *= uniformScale * 0.4;
     }
 
-    const scale = {
-      x: 0.2,
-      y: 0.2,
-    };
-    scale.x *= screenRatio;
+    // const scale = {
+    //   x: 0.2,
+    //   y: 0.2,
+    // };
+    // scale.x *= screenRatio;
 
     this.uniforms = {
       translation: [translation.x, translation.y, 0, 0],
